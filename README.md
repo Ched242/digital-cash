@@ -45,3 +45,5 @@ A browser redirect is never proof of payment. Orders must only be marked paid af
 ## Deployment
 
 Connect this repository to your hosting provider and configure the required environment variables there. Set the Supabase Auth Site URL and allowed redirect URL to the deployed application URL before testing email confirmation.
+
+<!-- CI recheck after workflow cache correction -->
