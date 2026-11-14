@@ -45,3 +45,16 @@ export async function setProductStatus(data: FormData) {
   revalidatePath('/admin/products');
   redirect('/admin/products?success=updated');
 }
+
+export async function setTicketStatus(data: FormData) {
+  const supabase = await requireAdmin();
+  const id = text(data, 'id');
+  const status = text(data, 'status');
+  if (!id || !['open', 'in_progress', 'resolved', 'closed'].includes(status)) {
+    redirect('/admin/support?error=invalid');
+  }
+  const { error } = await supabase.from('support_tickets').update({ status }).eq('id', id);
+  if (error) redirect('/admin/support?error=save');
+  revalidatePath('/admin/support');
+  redirect('/admin/support?success=updated');
+}
