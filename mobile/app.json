@@ -26,11 +26,6 @@
           "faceIDPermission": "Autoriser DIGITAL CASH à sécuriser votre session."
         }
       ]
-    ],
-    "extra": {
-      "eas": {
-        "projectId": "REPLACE_WITH_EXPO_PROJECT_ID"
-      }
-    }
+    ]
   }
 }
