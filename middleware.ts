@@ -19,7 +19,7 @@ export async function middleware(request: NextRequest) {
   });
 
   // Refresh and validate the session on the server; never trust client-side user metadata for roles.
-  await supabase.auth.getClaims();
+  await supabase.auth.getUser();
   return response;
 }
 
