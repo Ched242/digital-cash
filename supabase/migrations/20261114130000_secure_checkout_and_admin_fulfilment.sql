@@ -13,10 +13,7 @@ create policy orders_admin_update on public.orders
 drop policy if exists deliveries_select_own_or_admin on public.deliveries;
 create policy deliveries_select_own_or_admin on public.deliveries
   for select to authenticated
-  using (
-    ((select auth.uid()) = user_id and status = 'delivered')
-    or (select auth.jwt() -> 'app_metadata' ->> 'role') = 'admin'
-  );
+  using (((select auth.uid()) = user_id and status = 'delivered') or (select auth.jwt() -> 'app_metadata' ->> 'role') = 'admin');
 
 drop policy if exists deliveries_admin_insert on public.deliveries;
 create policy deliveries_admin_insert on public.deliveries
@@ -44,18 +41,19 @@ declare
   v_currency text := null;
   v_subtotal numeric(12,2) := 0;
   v_quantity integer;
-  v_count integer := 0;
 begin
   if v_user_id is null then
     raise exception 'authentication_required' using errcode = '42501';
   end if;
-  if jsonb_typeof(p_items) <> 'array' or jsonb_array_length(p_items) < 1 or jsonb_array_length(p_items) > 20 then
+  if p_items is null or jsonb_typeof(p_items) is distinct from 'array' then
+    raise exception 'invalid_cart' using errcode = '22023';
+  end if;
+  if jsonb_array_length(p_items) < 1 or jsonb_array_length(p_items) > 20 then
     raise exception 'invalid_cart' using errcode = '22023';
   end if;
 
   for v_item in select value from jsonb_array_elements(p_items)
   loop
-    v_count := v_count + 1;
     if coalesce(v_item->>'product_id','') !~* '^[0-9a-f-]{36}$'
       or coalesce(v_item->>'quantity','') !~ '^[0-9]+$' then
       raise exception 'invalid_cart_item' using errcode = '22023';
@@ -96,12 +94,7 @@ begin
     values (v_order_id, v_product.id, v_product.name, v_quantity, v_product.price, v_product.price * v_quantity);
   end loop;
 
-  return jsonb_build_object(
-    'order_id', v_order_id,
-    'order_number', v_order_number,
-    'total', v_subtotal,
-    'currency', v_currency
-  );
+  return jsonb_build_object('order_id', v_order_id, 'order_number', v_order_number, 'total', v_subtotal, 'currency', v_currency);
 end;
 $$;
 
