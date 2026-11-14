@@ -19,7 +19,7 @@ export default async function DashboardPage() {
     <section className="dashboard-stats"><article><span>Commandes récentes</span><strong>{orders?.length ?? 0}</strong></article><article><span>Compte</span><strong>Actif</strong></article><article><span>Langue</span><strong>{(profile?.preferred_language ?? 'fr').toUpperCase()}</strong></article></section>
     <section className="orders-panel"><div className="section-heading"><div><p className="eyebrow">SUIVI</p><h2>Mes commandes</h2></div><div className="actions"><Link className="text-link" href="/support">Centre d’aide</Link><Link className="text-link" href="/products">Voir les produits →</Link></div></div>
       {!orders?.length ? <div className="empty-state"><span>🧾</span><h3>Aucune commande pour le moment</h3><p>Vos commandes apparaîtront ici après vos premiers achats.</p><Link className="button" href="/products">Découvrir le catalogue</Link></div> :
-      <div className="orders-list">{orders.map(order => <article className="order-row" key={order.id}><div><strong>{order.order_number}</strong><small>{new Date(order.created_at).toLocaleDateString('fr-FR')}</small></div><span className="order-status">{order.status}</span><strong>{Number(order.total).toFixed(2)} {order.currency}</strong></article>)}</div>}
+      <div className="orders-list">{orders.map(order => <Link className="order-row order-row-link" href={`/orders/${order.id}`} key={order.id}><div><strong>{order.order_number}</strong><small>{new Date(order.created_at).toLocaleDateString('fr-FR')}</small></div><span className="order-status">{order.status.replaceAll('_',' ')}</span><strong>{Number(order.total).toFixed(2)} {order.currency}</strong></Link>)}</div>}
     </section>
   </main>;
 }
