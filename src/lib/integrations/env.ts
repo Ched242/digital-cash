@@ -7,8 +7,8 @@ const serverOnly = (name: string) => {
 
 export const integrationEnv = {
   supabaseUrl: process.env.NEXT_PUBLIC_SUPABASE_URL,
-  supabasePublishableKey: process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY,
-  supabaseServiceRoleKey: serverOnly('SUPABASE_SERVICE_ROLE_KEY'),
+  supabasePublishableKey: process.env.NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY ?? process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY,
+  supabaseSecretKey: serverOnly('SUPABASE_SECRET_KEY') ?? serverOnly('SUPABASE_SERVICE_ROLE_KEY'),
   payments: {
     provider: serverOnly('PAYMENT_PROVIDER'),
     baseUrl: serverOnly('PAYMENT_API_BASE_URL'),
@@ -59,5 +59,5 @@ export const integrationEnv = {
 } as const;
 
 export function hasSupabaseServerConfig() {
-  return Boolean(integrationEnv.supabaseUrl && integrationEnv.supabaseServiceRoleKey);
+  return Boolean(integrationEnv.supabaseUrl && integrationEnv.supabaseSecretKey);
 }
