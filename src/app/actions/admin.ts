@@ -65,7 +65,7 @@ export async function setOrderStatus(data: FormData) {
   const supabase = await requireAdmin();
   const id = text(data, 'id');
   const status = text(data, 'status');
-  if (!id || !['processing', 'completed', 'failed', 'cancelled'].includes(status)) redirect('/admin/orders?error=invalid');
+  if (!id || !['processing', 'failed', 'cancelled'].includes(status)) redirect('/admin/orders?error=invalid');
   const { data: order } = await supabase.from('orders').select('id,status').eq('id', id).maybeSingle();
   if (!order || !['paid', 'processing'].includes(order.status)) redirect('/admin/orders?error=unpaid');
   const { error } = await supabase.from('orders').update({ status }).eq('id', id);
