@@ -21,7 +21,7 @@ export default async function AdminProductsPage({ searchParams }: { searchParams
     <section className="orders-panel"><h2>Ajouter un produit</h2><form action={createProduct} className="admin-product-form">
       <label>Nom du produit<input name="name" required maxLength={120} /></label>
       <label>Identifiant URL (slug)<input name="slug" required pattern="[a-zA-Z0-9-]+" placeholder="exemple-carte-cadeau" /></label>
-      <label>Type de produit<input name="product_type" required placeholder="gift_card, airtime, gaming..." /></label>
+      <label>Type de produit<select name="product_type" defaultValue="gift_card" required><option value="gift_card">Carte cadeau</option><option value="mobile_topup">Recharge mobile</option><option value="data_bundle">Forfait Internet</option><option value="gaming_credit">Crédit gaming</option><option value="subscription">Abonnement</option><option value="software">Logiciel</option><option value="other">Autre</option></select></label>
       <label>Catégorie<select name="category_id" defaultValue=""><option value="">Sans catégorie</option>{(categories ?? []).map(c => <option key={c.id} value={c.id}>{c.name}</option>)}</select></label>
       <label>Prix<input name="price" type="number" min="0" step="0.01" required /></label>
       <label>Devise (3 lettres)<input name="currency" defaultValue="USD" minLength={3} maxLength={3} required /></label>
