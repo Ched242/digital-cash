@@ -1,0 +1,36 @@
+{
+  "expo": {
+    "name": "DIGITAL CASH",
+    "slug": "digital-cash",
+    "version": "0.1.0",
+    "orientation": "portrait",
+    "userInterfaceStyle": "light",
+    "scheme": "digitalcash",
+    "ios": {
+      "bundleIdentifier": "com.digitalcash.marketplace",
+      "supportsTablet": true,
+      "config": {
+        "usesNonExemptEncryption": false
+      }
+    },
+    "android": {
+      "package": "com.digitalcash.marketplace",
+      "adaptiveIcon": {
+        "backgroundColor": "#171717"
+      }
+    },
+    "plugins": [
+      [
+        "expo-secure-store",
+        {
+          "faceIDPermission": "Autoriser DIGITAL CASH à sécuriser votre session."
+        }
+      ]
+    ],
+    "extra": {
+      "eas": {
+        "projectId": "REPLACE_WITH_EXPO_PROJECT_ID"
+      }
+    }
+  }
+}
