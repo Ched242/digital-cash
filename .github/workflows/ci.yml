@@ -17,7 +17,7 @@ jobs:
       - run: npm run build
         env:
           NEXT_PUBLIC_SUPABASE_URL: https://example.supabase.co
-          NEXT_PUBLIC_SUPABASE_ANON_KEY: build-placeholder
+          NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY: build-placeholder
           NEXT_PUBLIC_APP_URL: https://example.invalid
 
   mobile-bundle:
