@@ -13,7 +13,7 @@ export default function Home() {
       <header className="topbar">
         <a className="brand" href="/">DIGITAL<span>CASH</span></a>
         <nav aria-label="Navigation principale">
-          <a href="#categories">Catégories</a>
+          <a href="#categories">Catégories</a>\n          <a href="/products">Catalogue</a>
           <a href="#how-it-works">Comment ça marche</a>
         </nav>
         <div className="actions">
@@ -28,7 +28,7 @@ export default function Home() {
           <h1>Le digital, <span>en toute simplicité.</span></h1>
           <p className="intro">Cartes cadeaux, recharges, jeux, abonnements et services numériques : retrouvez vos essentiels sur une seule plateforme.</p>
           <div className="hero-actions">
-            <a className="button" href="#categories">Explorer les catégories</a>
+            <a className="button" href="/products">Explorer le catalogue</a>
             <a className="text-link" href="/register">Rejoindre DIGITAL CASH →</a>
           </div>
           <div className="trust-line"><span className="status-dot" /> Une plateforme pensée pour une expérience simple et transparente</div>
