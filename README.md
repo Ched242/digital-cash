@@ -42,4 +42,4 @@ The first admin must be granted `app_metadata.role = "admin"` through a trusted 
 Payment gateways, MTN/Airtel/Orange Money, digital-goods suppliers and notifications remain unconfigured. Add provider keys only as server-side secrets after selecting and testing the official provider adapters for the target countries. Never commit secrets or put them in `EXPO_PUBLIC_` variables.
 
 ## Deployment
-Connect the repository to a hosting provider, configure the Supabase URL and publishable key, then set the Supabase Auth Site URL and redirect allowlist to the deployed web URL. Configure the Expo EAS project ID before building Android/iOS binaries.
+Follow [the deployment checklist](docs/DEPLOYMENT.md) to connect Vercel, configure Supabase redirects, provision the first admin safely, and prepare Android/iOS builds.
